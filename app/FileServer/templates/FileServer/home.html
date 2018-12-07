@@ -1,0 +1,39 @@
+{% extends 'FileServer/base.html'%}
+{% block content %}
+{% load static %}
+<script src=" {%static 'FileServer/main.js' %}"></script>
+<link rel="stylesheet" href="{% static 'FileServer/main.css'%}">
+<div class="w-75 location">
+</div>
+    <div class="w-75 " style="font-size:0.7em;">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Path</th>
+            <th scope="col">Modified</th>
+          </tr>
+        </thead>
+
+        <tbody class="tbdy">
+          {% for file in Files.values %}
+            <tr>
+
+              <td>
+                {% if file.dir %}
+                <a class="folder" href="/folder/{{file.path}}" ><img src="http://localhost:80/f.jpg"  height="14" width="14">{{file.name}}</a>
+                {% else %}
+                <a href="{{file.path}}" class="file">{{file.name}}</a>
+                {% endif %}
+              </td>
+              <td>{{file.size}}</td>
+              <td>{{file.path}}</td>
+              <td>{{file.modified}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+{% endblock content %}
